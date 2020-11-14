@@ -47,6 +47,14 @@ Assumed token order from A-R is:
 
 
 ### Roll Dice
-	Will pick 2 random numbers from 1-6 each. Will store the result in rollFreqArr.
-	Will flas
+	Will pick 2 random numbers from 1-6 each. 
+
+	Will flash tiles with matching value for 15s.
+
+	Will store the value result in rollFreqArr.
+	
+	Will store the resource result in resourceFreqArr.
+
+
 ### Rainbow Spiral
+	Will set the board to spiral with a rainbow pattern. Not for gameplay, just for show.
