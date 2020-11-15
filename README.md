@@ -22,9 +22,9 @@ Assumed token order from A-R is:
 	Will set resources on the board with the following frequency:
 
 	* 1x Yellow (Desert)
-	* 3x Gray (Ore)
+	* 3x Blue (Ore)
 	* 3x Red (Brick)
-	* 3x Orange (Wheat)
+	* 4x Orange (Wheat)
 	* 4x Green (Wood)
 	* 4x Light Green (Sheep)
 
