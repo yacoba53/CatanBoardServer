@@ -59,6 +59,7 @@ Assumed token order from A-R is:
 * [Power Supply](https://www.amazon.com/gp/product/B078RT3ZPS/ref=ppx_od_dt_b_asin_title_s00?ie=UTF8&psc=1)
 * Balsa Wood
 * Frosted Plexiglass
+* Wood
 
 ### Tools
 
