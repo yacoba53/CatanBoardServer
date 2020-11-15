@@ -76,13 +76,34 @@ Base (with hex walls)
 
 top (acrylic cover and walls)
 
-* 6 x 26.5cmx6cm wood outer walls (4 with 17cmx4cm holes)
+* 6 x 26.5cmx6cm wood outer walls 
+(4 with 17cmx4cm holes 1cm from bottom, and 4.75 from edge)
 * 1 x 40cmx40cm acrylic square (to cut to hex top)
 * 1 x 40cmx40cm balse square (to cut to hex top outline)
 * 6 x 26.5cmx4.5cm wood top pieces (corners cut)
 
 drawers (4 drawers)
-* 8 x 18.5cmx5cm wood drawer front/back
-* 8 x 4cm#x3cm drawer sides (#slightly smaller)
+* 8 x 18.5cmx5.5cm wood drawer front/back
+* 8 x 4cm#x3.5cm# drawer sides 
+(#minus thickness of bottoms, minus twice the thickness of front)
 * 4 x 17cm#x3.5cm drawer bottoms (#slightly smaller)
 * 4 x drawer knobs
+
+### Assembly
+
+1. Assemble hexes with holes cut in bottom
+2. Trace hex pattern on the hex base board
+3. Attach wires to base hexagon
+4. Glue together top wood
+5. Attach acrylic hex on under side of top wood
+6. Attach balsa hex pattern outline to top of acrylic hex
+7. Attach outside walls to under side of 
+8. Assemble the drawers
+	1. Attach sides to top of bottom
+	2. Attach back to sides/bottom .75cm from side, 1cm from bottom
+	3. Insert back of drawer through hole
+	4. Attach front to sides/bottom, .75cm from side, .75cm from bottom
+	5. Attach knob to drawers
+9. Cut power hole for microcontroller
+10. Latch top to base with microcontroller 
+in no drawer section with power hole
