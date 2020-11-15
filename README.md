@@ -8,8 +8,6 @@ A RESTful webserver will be uploaded to the microcontroller.
 The open endpoints will control the various lighting functions 
 for a string of individually addressable lights.
 
-A hex is 4.5cm per side
-
 Assumed token order from A-R is:  
 [ 5,  2,  6,  3,  8,
  10,  9, 12, 11,  4,
@@ -28,12 +26,12 @@ Assumed token order from A-R is:
 	* 4x Green (Wood)
 	* 4x Light Green (Sheep)
 
-	Will flash the starting tile for 30s (first tile for numbered Tokens), 
+	Will flash the starting tile for 15s (first tile for numbered Tokens), 
 	and assign token number values according to relative 
 	position going counter-clockwise and inward.
 
 	will assign each addressable LED its proper number value 2-12, 
-	using 2 per hex up tp 38.
+	using 2 per hex up to 38.
 
 
 #### Roll Dice
