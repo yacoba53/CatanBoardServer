@@ -65,6 +65,7 @@ Assumed token order from A-R is:
 * Computer
 * Soldering Iron
 * jigsaw
+* wood glue
 
 ### Box Pieces
 
@@ -78,7 +79,7 @@ top (acrylic cover and walls)
 * 6 x 26.5cmx6cm wood outer walls (4 with 17cmx4cm holes)
 * 1 x 40cmx40cm acrylic square (to cut to hex top)
 * 1 x 40cmx40cm balse square (to cut to hex top outline)
-* 6 x 26.5cmx4.5cm wood top pieces
+* 6 x 26.5cmx4.5cm wood top pieces (corners cut)
 
 drawers (4 drawers)
 * 8 x 18.5cmx5cm wood drawer front/back
