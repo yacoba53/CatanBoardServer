@@ -8,8 +8,8 @@
 #include <Adafruit_NeoPixel.h>
 
 // Replace with your network credentials
-const char* ssid     = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* ssid     = "n";
+const char* password = "n";
 
 // Set web server port number to 80
 WiFiServer server(80);
@@ -19,7 +19,7 @@ String header;
 
 // Which pin on the Arduino is connected to the NeoPixels?
 // On a Trinket or Gemma we suggest changing this to 1:
-#define LED_PIN    6
+#define LED_PIN D1
  
 // How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 38
@@ -45,31 +45,31 @@ uint32_t lightGreen = strip.Color(152, 252, 3);
 uint32_t violet = strip.Color(252, 3, 244);
 
 //token order
-int[18] tokenOrder = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11}
+int tokenOrder[18] = { 5, 2, 6, 3, 8, 10, 9, 12, 11, 4, 8, 10, 9, 4, 5, 6, 3, 11};
 
 //token order
-int[12] tokenJumpOrder = { 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 12, 12 }
+int tokenJumpOrder[12] = { 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 12, 12 };
 
 //resource options
-int[19] resourceOptions = { 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5}
+int resourceOptions[19] = { 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5};
 
 // Hex tokens (-1 for desert)
-int[19] hexTokens;
+int hexTokens[19];
 
 // Hex colors
-int[19] hexColors;
+int hexColors[19];
 
 // Roll Stats
-int[13] rollStats;
+int rollStats[13];
 
 // Roll Stats
-int[6] resourceStats;
+int resourceStats[6];
 
 // Last Roll Result
 int currentRoll;
 
 //color index options
-uint32_t[6] colorIndex = { yellow, blue, orange, red, green, lightGreen }
+uint32_t colorIndex[6] = { yellow, blue, orange, red, green, lightGreen };
 
 // Current time
 unsigned long currentTime = millis();
@@ -139,7 +139,7 @@ void loop(){
 
             } else if (header.indexOf("GET /rainbow") >= 0) {
               Serial.println("setting rainbow pattern...");
-              theaterChaseRainbow(50)
+              theaterChaseRainbow(50);
             } 
             
             // Display the HTML web page
@@ -160,35 +160,35 @@ void loop(){
             client.println("<p>Roll Dice</p>");
             client.println("<p><a href=\"/roll-dice\"><button class=\"button button2\">Roll</button></a></p>");
  
- 			client.println("<p>Rainbow Pattern</p>");
+       client.println("<p>Rainbow Pattern</p>");
             client.println("<p><a href=\"/rainbow\"><button class=\"button button2\">Rainbow</button></a></p>");
 
             client.println("<p>Current Roll</p>");
-            client.println("<p><button class=\"button button2\">"+ currentRoll +"</button></p>");
+            client.println("<p><button class=\"button button2\">"+ String(currentRoll) +"</button></p>");
 
 
             client.println("<p>Roll Stats</p>");
             client.println("<ol type = \"1\" start=2>");
-            client.println("<li>"+ rollStats[2] +"</li>");
-            client.println("<li>"+ rollStats[3] +"</li>");
-            client.println("<li>"+ rollStats[4] +"</li>");
-            client.println("<li>"+ rollStats[5] +"</li>");
-            client.println("<li>"+ rollStats[6] +"</li>");
-            client.println("<li>"+ rollStats[7] +"</li>");
-            client.println("<li>"+ rollStats[8] +"</li>");
-            client.println("<li>"+ rollStats[9] +"</li>");
-            client.println("<li>"+ rollStats[10] +"</li>");
-            client.println("<li>"+ rollStats[11] +"</li>");
-            client.println("<li>"+ rollStats[12] +"</li>");
+            client.println("<li>"+ String(rollStats[2]) +"</li>");
+            client.println("<li>"+ String(rollStats[3]) +"</li>");
+            client.println("<li>"+ String(rollStats[4]) +"</li>");
+            client.println("<li>"+ String(rollStats[5]) +"</li>");
+            client.println("<li>"+ String(rollStats[6]) +"</li>");
+            client.println("<li>"+ String(rollStats[7]) +"</li>");
+            client.println("<li>"+ String(rollStats[8]) +"</li>");
+            client.println("<li>"+ String(rollStats[9]) +"</li>");
+            client.println("<li>"+ String(rollStats[10]) +"</li>");
+            client.println("<li>"+ String(rollStats[11]) +"</li>");
+            client.println("<li>"+ String(rollStats[12]) +"</li>");
             client.println("</ol>");
 
             client.println("<p>Resource Stats</p>");
             client.println("<ul>");
-            client.println("<li> Ore: "+ resourceStats[1] +"</li>");
-            client.println("<li> Brick: "+ resourceStats[2] +"</li>");
-            client.println("<li> Wheat: "+ resourceStats[3] +"</li>");
-            client.println("<li> Wood: "+ resourceStats[4] +"</li>");
-            client.println("<li> Sheep: "+ resourceStats[5] +"</li>");
+            client.println("<li> Ore: "+   String(resourceStats[1]) +"</li>");
+            client.println("<li> Brick: "+ String(resourceStats[2]) +"</li>");
+            client.println("<li> Wheat: "+ String(resourceStats[3]) +"</li>");
+            client.println("<li> Wood: "+ String(resourceStats[4]) +"</li>");
+            client.println("<li> Sheep: "+ String(resourceStats[5]) +"</li>");
             client.println("</ul>");
  
             client.println("</body></html>");
@@ -236,147 +236,149 @@ void theaterChaseRainbow(int wait) {
   }
 }
 
+void shuffleArray(int arr[] , int n) {
+  int temp = 0;
+  int ridx = n-1;
+
+  for(int j=(n-1); j>0; j--)// one pass through array
+  {
+    randNumber = random(100);
+    ridx = randNumber%(j+1);// index = 0 to j
+    temp = arr[ridx];// temp val set to random index val
+    arr[ridx] = arr[j];// random index set to end val
+    arr[j] = temp;// selected element moved to end. This value is final
+  }
+}
+
 void initBoard(){
-	// resetStats
-	currentRoll = 0;
-	for(int i= 0; i < 13; i++){
-		rollStats[i] = 0;
-	}
-	for(int i= 0; i < 6; i++){
-		resourceStats[i] = 0;
-	}
+  // resetStats
+  currentRoll = 0;
+  for(int i= 0; i < 13; i++){
+    rollStats[i] = 0;
+  }
+  for(int i= 0; i < 6; i++){
+    resourceStats[i] = 0;
+  }
+  
+  //copy starting order from template then randomize resource order
+  for( int i = 0 ; i < 19 ; ++i ){
+    hexColors[i] = resourceOptions[i];
+  }
+  shuffleArray(hexColors, 19);
 
-	
-	//randomize resource order
-	hexColors = shuffleArray(resourceOptions, 19);
-	int lightIndex = 0;
-	for(int i=0; i<19; i++){
-		strip.setPixelColor(i, colorIndex[hexColors[i]]);
-		strip.setPixelColor(i+1, colorIndex[hexColors[i]]);
-		lightIndex+=2;
-	}
+  //set colors
+  int lightIndex = 0;
+  for(int i=0; i<19; i++){
+    strip.setPixelColor(i, colorIndex[hexColors[i]]);
+    strip.setPixelColor(i+1, colorIndex[hexColors[i]]);
+    lightIndex+=2;
+  }
 
-	// set j as a random outer ring start hex
-	int startHex = random(11);
-	int j = startHex;
-	// k to track which token we're on
-	int k = 0;
-	for(int i=0; i<12; i++){
-		if(j >11){
-			j = 0;
-		}
-		if(hexColors[i] != 0){
-			hexTokens[j] = tokenOrder[k]; 
-			j++;
-			k++;
-		}else{
-			hexTokens[j] = -1; 
-			j++;
-		}
-	}
-	// set j as the next inner ring hex
-	j = tokenJumpOrder[j]
-	for(int i=12; i<18; i++){
-		if(j > 17){
-			j = 12;
-		}
-		if(hexColors[i] != 0){
-			hexTokens[j] = tokenOrder[k]; 
-			j++;
-			k++;
-		}else{
-			hexTokens[j] = -1; 
-			j++;
-		}
-	}
-	//set center token
-	if(hexColors[18] != 0){
-		hexTokens[18] = tokenOrder[18];
-	}else{
-		hexTokens[18] = -1;
-	}
-	// flash starting token
-	int[1] startTokenArr = { startHex };
-	flashHexArr(startTokenArr, 1, 15);
+  // set j as a random outer ring start hex
+  int startHex = random(11);
+  int j = startHex;
+  // k to track which token we're on
+  int k = 0;
+  for(int i=0; i<12; i++){
+    if(j >11){
+      j = 0;
+    }
+    if(hexColors[i] != 0){
+      hexTokens[j] = tokenOrder[k]; 
+      j++;
+      k++;
+    }else{
+      hexTokens[j] = -1; 
+      j++;
+    }
+  }
+  // set j as the next inner ring hex
+  j = tokenJumpOrder[j];
+  for(int i=12; i<18; i++){
+    if(j > 17){
+      j = 12;
+    }
+    if(hexColors[i] != 0){
+      hexTokens[j] = tokenOrder[k]; 
+      j++;
+      k++;
+    }else{
+      hexTokens[j] = -1; 
+      j++;
+    }
+  }
+  //set center token
+  if(hexColors[18] != 0){
+    hexTokens[18] = tokenOrder[18];
+  }else{
+    hexTokens[18] = -1;
+  }
+  // flash starting token
+  int startTokenArr[1] = { startHex };
+  flashHexArr(startTokenArr, 1, 15);
 }
 
 void rollDice(){
-	//rolls 2 die values and sums them
-	//records resource and roll stat
-	//flashes hexes with rolled value
+  //rolls 2 die values and sums them
+  //records resource and roll stat
+  //flashes hexes with rolled value
 
-	int diceRollA = random(5) + 1;
-	int diceRollB = random(5) + 1;
-	int rollResult = diceRollA + diceRollB;
-	rollStats[rollResult]++;
-	currentRoll = rellResult;
+  int diceRollA = random(5) + 1;
+  int diceRollB = random(5) + 1;
+  int rollResult = diceRollA + diceRollB;
+  rollStats[rollResult]++;
+  currentRoll = rollResult;
 
-	int resultindex = 0;
-	if(rollResult == 2 || rollResult == 12){
-		int[1] rollOptions;
-		for(int i=0; i<18; i++){
-			if(hexTokens[i] == rollResult){
-				rollOptions[resultIndex] = i;
-				resultIndex++;
-				resourceStats[hexColors[i]]++;
-			}
-		}
-		flashHexArr(rollOptions, 1, 15);
-	}else if (rollResult == 7){
-		flashHexArr(hexColors, 19, 5);
-	} else {
-		int[2] rollOptions;
-		for(int i=0; i<18; i++){
-			if(hexTokens[i] == rollResult){
-				rollOptions[resultIndex] = i;
-				resultIndex++;
-				resourceStats[hexColors[i]]++;
-			}
-		}
-		flashHexArr(rollOptions, 2, 15);
-	}
+  int resultIndex = 0;
+  if(rollResult == 2 || rollResult == 12){
+    int rollOptions[1];
+    for(int i=0; i<18; i++){
+      if(hexTokens[i] == rollResult){
+        rollOptions[resultIndex] = i;
+        resultIndex++;
+        resourceStats[hexColors[i]]++;
+      }
+    }
+    flashHexArr(rollOptions, 1, 15);
+  }else if (rollResult == 7){
+    flashHexArr(hexColors, 19, 5);
+  } else {
+    int rollOptions[2] ;
+    for(int i=0; i<18; i++){
+      if(hexTokens[i] == rollResult){
+        rollOptions[resultIndex] = i;
+        resultIndex++;
+        resourceStats[hexColors[i]]++;
+      }
+    }
+    flashHexArr(rollOptions, 2, 15);
+  }
 }
 
-int[] shuffleArray(int[] arr, int n)
+void flashHexArr(int hexIndices[] , int size, int time)
 {
-	int temp = 0;
-	int ridx = n-1;
+  // each loop is 1 second, repeat for {time} seconds
+  for(int t=0; t < time; t++){
+    //set each to violet
+    for(int i=0; i < size; i++){
+      int index = hexIndices[i];
+      int lightIndex = index * 2;
 
-	for(int j=(n-1); j>0; j--)// one pass through array
-	{
-		randNumber = random(100);
-		ridx = randNumber%(j+1);// index = 0 to j
-		temp = arr[ridx];// temp val set to random index val
-		arr[ridx] = arr[j];// random index set to end val
-		arr[j] = temp;// selected element moved to end. This value is final
-	}
-	return arr;
-}
+      strip.setPixelColor(lightIndex, violet);
+      strip.setPixelColor(lightIndex+1, violet);
+    }
+    // hold for .25 seconds
+    delay(250);
 
-void flashHexArr(int[] hexIndices, int size, int time)
-{
-	// each loop is 1 second, repeat for {time} seconds
-	for(int t=0; t < time; t++){
-		//set each to violet
-		for(int i=0; i < size; i++){
-			int index = hexIndices[i];
-			int lightIndex = index * 2;
+    // set each to original color
+    for(int i=0; i < size; i++){
+      int index = hexIndices[i];
+      int lightIndex = index * 2;
 
-			strip.setPixelColor(lightIndex, violet);
-			strip.setPixelColor(lightIndex+1, violet);
-		}
-		// hold for .25 seconds
-		delay(250)
-
-		// set each to original color
-		for(int i=0; i < size; i++){
-			int index = hexIndices[i];
-			int lightIndex = index * 2;
-
-			strip.setPixelColor(lightIndex, colorIndex[hexColors[index]]);
-			strip.setPixelColor(lightIndex+1, colorIndex[hexColors[index]]);
-		}
-		// hold for .75 seconds
-		delay(750); 
-	}
+      strip.setPixelColor(lightIndex, colorIndex[hexColors[index]]);
+      strip.setPixelColor(lightIndex+1, colorIndex[hexColors[index]]);
+    }
+    // hold for .75 seconds
+    delay(750); 
+  }
 }
