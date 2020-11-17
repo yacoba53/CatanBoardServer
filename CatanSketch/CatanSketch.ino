@@ -347,7 +347,7 @@ void rollDice(){
     flashHexArr(rollOptions, 1, 15);
   }else if (rollResult == 7){
     int allIndices[19] = {};
-    for(int x = 0; i <19; i++){
+    for(int x = 0; x <19; x++){
       allIndices[x] = x;
     }
     flashHexArr(allIndices, 19, 5);
