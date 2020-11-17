@@ -70,6 +70,7 @@ int currentRoll;
 
 //color index options
 uint32_t colorIndex[6] = { black, blue, orange, red, green, white };
+String colorNameIndex[6] = { "black", "blue", "orange", "red", "green", "white" };
 
 // Current time
 unsigned long currentTime = millis();
@@ -284,7 +285,7 @@ void initBoard(){
     if(j >11){
       j = 0;
     }
-    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(hexColors[i])); 
+    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(colorNameIndex[hexColors[j]])); 
     if(hexColors[i] != 0){
       hexTokens[j] = tokenOrder[k]; 
       j++;
@@ -295,12 +296,12 @@ void initBoard(){
     }
   }
   // set j as the next inner ring hex
-  j = tokenJumpOrder[j];
+  j = tokenJumpOrder[j-1];
   for(int i=12; i<18; i++){
     if(j > 17){
       j = 12;
     }
-    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(hexColors[i])); 
+    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(colorNameIndex[hexColors[j]])); 
     if(hexColors[i] != 0){
       hexTokens[j] = tokenOrder[k]; 
       j++;
@@ -316,7 +317,7 @@ void initBoard(){
   }else{
     hexTokens[18] = -1;
   }
-  Serial.println("setting hex:" +String(18)+" to token:"+ String(tokenOrder[17]) + " to color "+ String(hexColors[18])); 
+  Serial.println("setting hex:" +String(18)+" to token:"+ String(tokenOrder[17]) + " to color "+ String(colorNameIndex[hexColors[18]])); 
 
   // flash starting token
   int startTokenArr[1] = { startHex };
@@ -353,7 +354,7 @@ void rollDice(){
     flashHexArr(allIndices, 19, 5);
   } else {
     int rollOptions[2] ;
-    for(int i=0; i<18; i++){
+    for(int i=0; i<19; i++){
       if(hexTokens[i] == rollResult){
         rollOptions[resultIndex] = i;
         resultIndex++;
