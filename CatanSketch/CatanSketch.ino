@@ -1,7 +1,7 @@
 /*********
   DIY Catan Board
-  Template: Rui Santos
-  Edited by: Jacob Abbott
+  Webserver Template: Rui Santos
+  Catan Features by: Jacob Abbott
 *********/
 
 #include <ESP8266WiFi.h>
@@ -22,13 +22,13 @@ String header;
 #define LED_PIN D1
  
 // How many NeoPixels are attached to the Arduino?
-#define LED_COUNT 38
+#define LED_COUNT 50
 
 //initialize light strip
-Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ400);
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_RGB + NEO_KHZ400);
 
 
-//Yellow (Desert) = 0
+//Black (Desert) = 0
 //Blue (Ore) = 1
 //Red (Brick) = 2
 //Orange (Wheat) =3
@@ -36,12 +36,12 @@ Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ400);
 //Light Green (Sheep) = 5
 
 //set colors
-uint32_t yellow = strip.Color(252, 248, 3);
+uint32_t black = strip.Color(0, 0, 0);
 uint32_t blue = strip.Color(0, 0, 255);
 uint32_t orange = strip.Color(252, 123, 3);
 uint32_t red = strip.Color(255, 0, 0);
 uint32_t green = strip.Color(0, 255, 0);
-uint32_t lightGreen = strip.Color(152, 252, 3);
+uint32_t white = strip.Color(255, 255, 255);
 uint32_t violet = strip.Color(252, 3, 244);
 
 //token order
@@ -69,7 +69,7 @@ int resourceStats[6];
 int currentRoll;
 
 //color index options
-uint32_t colorIndex[6] = { yellow, blue, orange, red, green, lightGreen };
+uint32_t colorIndex[6] = { black, blue, orange, red, green, white };
 
 // Current time
 unsigned long currentTime = millis();
@@ -81,7 +81,7 @@ const long timeoutTime = 2000;
 long randNumber;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(74880);
   randomSeed(analogRead(0));
 
   // Connect to Wi-Fi network with SSID and password
@@ -221,7 +221,7 @@ void theaterChaseRainbow(int wait) {
     for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
       strip.clear();         //   Set all pixels in RAM to 0 (off)
       // 'c' counts up from 'b' to end of strip in increments of 3...
-      for(int c=b; c<strip.numPixels(); c += 3) {
+      for(int c=b; c<strip.numPixels(); c += 1) {
         // hue of pixel 'c' is offset by an amount to make one full
         // revolution of the color wheel (range 65536) along the length
         // of the strip (strip.numPixels() steps):
@@ -269,9 +269,10 @@ void initBoard(){
   //set colors
   int lightIndex = 0;
   for(int i=0; i<19; i++){
-    strip.setPixelColor(i, colorIndex[hexColors[i]]);
-    strip.setPixelColor(i+1, colorIndex[hexColors[i]]);
+    strip.setPixelColor(lightIndex, colorIndex[hexColors[i]]);
+    strip.setPixelColor(lightIndex+1, colorIndex[hexColors[i]]);
     lightIndex+=2;
+    strip.show();
   }
 
   // set j as a random outer ring start hex
@@ -283,6 +284,7 @@ void initBoard(){
     if(j >11){
       j = 0;
     }
+    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(hexColors[i])); 
     if(hexColors[i] != 0){
       hexTokens[j] = tokenOrder[k]; 
       j++;
@@ -298,6 +300,7 @@ void initBoard(){
     if(j > 17){
       j = 12;
     }
+    Serial.println("setting hex:" +String(j)+" to token:"+ String(tokenOrder[k]) + " to color "+ String(hexColors[i])); 
     if(hexColors[i] != 0){
       hexTokens[j] = tokenOrder[k]; 
       j++;
@@ -309,13 +312,15 @@ void initBoard(){
   }
   //set center token
   if(hexColors[18] != 0){
-    hexTokens[18] = tokenOrder[18];
+    hexTokens[18] = tokenOrder[17];
   }else{
     hexTokens[18] = -1;
   }
+  Serial.println("setting hex:" +String(18)+" to token:"+ String(tokenOrder[17]) + " to color "+ String(hexColors[18])); 
+
   // flash starting token
   int startTokenArr[1] = { startHex };
-  flashHexArr(startTokenArr, 1, 15);
+  flashHexArr(startTokenArr, 1, 5);
 }
 
 void rollDice(){
@@ -341,7 +346,11 @@ void rollDice(){
     }
     flashHexArr(rollOptions, 1, 15);
   }else if (rollResult == 7){
-    flashHexArr(hexColors, 19, 5);
+    int allIndices[19] = {};
+    for(int x = 0; i <19; i++){
+      allIndices[x] = x;
+    }
+    flashHexArr(allIndices, 19, 5);
   } else {
     int rollOptions[2] ;
     for(int i=0; i<18; i++){
@@ -364,9 +373,10 @@ void flashHexArr(int hexIndices[] , int size, int time)
       int index = hexIndices[i];
       int lightIndex = index * 2;
 
-      strip.setPixelColor(lightIndex, violet);
-      strip.setPixelColor(lightIndex+1, violet);
+      strip.setPixelColor(lightIndex, black);
+      strip.setPixelColor(lightIndex+1, black);
     }
+    strip.show();
     // hold for .25 seconds
     delay(250);
 
@@ -378,6 +388,7 @@ void flashHexArr(int hexIndices[] , int size, int time)
       strip.setPixelColor(lightIndex, colorIndex[hexColors[index]]);
       strip.setPixelColor(lightIndex+1, colorIndex[hexColors[index]]);
     }
+    strip.show();
     // hold for .75 seconds
     delay(750); 
   }

@@ -19,14 +19,14 @@ Assumed token order from A-R is:
 #### Set Board
 	Will set resources on the board with the following frequency:
 
-	* 1x Yellow (Desert)
+	* 1x No Color (Desert)
 	* 3x Blue (Ore)
 	* 3x Red (Brick)
 	* 4x Orange (Wheat)
 	* 4x Green (Wood)
-	* 4x Light Green (Sheep)
+	* 4x White (Sheep)
 
-	Will flash the starting tile for 15s (first tile for numbered Tokens), 
+	Will flash the starting tile for 5s (first tile for numbered Tokens), 
 	and assign token number values according to relative 
 	position going counter-clockwise and inward.
 
@@ -37,7 +37,7 @@ Assumed token order from A-R is:
 #### Roll Dice
 	Will pick 2 random numbers from 1-6 each. 
 
-	Will flash tiles with matching value for 15s.
+	Will flash tiles with matching value for 5s.
 
 	Will store the value result in rollFreqArr.
 	
