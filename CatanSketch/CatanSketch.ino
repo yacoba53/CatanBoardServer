@@ -8,8 +8,8 @@
 #include <Adafruit_NeoPixel.h>
 
 // Replace with your network credentials
-const char* ssid     = "n";
-const char* password = "n";
+const char* ssid     = "idkaskmark";
+const char* password = "idkasksam";
 
 // Set web server port number to 80
 WiFiServer server(80);
