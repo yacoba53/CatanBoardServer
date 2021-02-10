@@ -106,3 +106,7 @@ drawers (4 drawers)
 9. Cut power hole for microcontroller
 10. Latch top to base with microcontroller 
 in no drawer section with power hole
+
+### Photos
+
+![prototype](https://github.com/yacoba53/CatanBoardServer/blob/main/prototype.jpg?raw=true)
