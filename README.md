@@ -109,4 +109,5 @@ in no drawer section with power hole
 
 ### Photos
 
-![prototype](images/prototype.jpg)
+Prototype:
+![prototype](images/prototype.jpg "prototype")
