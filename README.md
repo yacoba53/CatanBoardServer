@@ -109,4 +109,4 @@ in no drawer section with power hole
 
 ### Photos
 
-![prototype](https://github.com/yacoba53/CatanBoardServer/blob/main/prototype.jpg?raw=true)
+![prototype](prototype.jpg?raw=true)
