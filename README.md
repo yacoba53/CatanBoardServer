@@ -107,6 +107,14 @@ drawers (4 drawers)
 10. Latch top to base with microcontroller 
 in no drawer section with power hole
 
+
+### Progress
+Update 1:
+
+We have built a prototype of the LED set up using a cardboard board. 
+We recently ordered the supplies to start constructing the frame and dividers,
+and will start work on that soon.
+
 ### Photos
 
 Prototype:
